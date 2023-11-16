@@ -3,24 +3,24 @@ using AnimalShelter.Models;
 
 namespace AnimalShelter.Repository
 {
-    public class ModelRepository : RepositoryBase<Model>, IModelRepository
+    public class AnimalRepository : RepositoryBase<Animal>, IAnimalRepository
     {
-        public ModelRepository(ApiTempContext repositoryContext)
+        public AnimalRepository(AnimalShelterContext repositoryContext)
             : base(repositoryContext)
         {
         }
 
-        public PagedList<Model> GetModels(PagedParameters modelParameters)
+        public PagedList<Animal> GetAnimals(PagedParameters animalParameters)
         {
-            return PagedList<Model>.ToPagedList(FindAll(),
-                modelParameters.PageNumber,
-                modelParameters.PageSize);
+            return PagedList<Animal>.ToPagedList(FindAll(),
+                animalParameters.PageNumber,
+                animalParameters.PageSize);
         }
 
-        public Model GetModelById(Guid modelId)
+        public Animal GetAnimalById(Guid animalId)
         {
-            return FindByCondition(mod => mod.ModelId.Equals(modelId))
-                .DefaultIfEmpty(new Model())
+            return FindByCondition(ani => ani.AnimalId.Equals(animalId))
+                .DefaultIfEmpty(new Animal())
                 .FirstOrDefault();
         }
 

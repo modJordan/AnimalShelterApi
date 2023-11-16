@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using ApiTemp.Models;
+using AnimalShelter.Models;
 using System.Linq.Expressions;
-using ApiTemp.Contracts;
+using AnimalShelter.Contracts;
 
-namespace ApiTemp.Repository
+namespace AnimalShelter.Repository
 {
   public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
   {
-    protected ApiTempContext RepositoryContext { get; set;}
-    public RepositoryBase(ApiTempContext repositoryContext)
+    protected AnimalShelterContext RepositoryContext { get; set;}
+    public RepositoryBase(AnimalShelterContext repositoryContext)
     {
       this.RepositoryContext = repositoryContext;
     }
