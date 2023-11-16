@@ -1,4 +1,4 @@
-namespace ApiTemp.Models
+namespace AnimalShelter.Models
 {
   public class PagedParameters
   {

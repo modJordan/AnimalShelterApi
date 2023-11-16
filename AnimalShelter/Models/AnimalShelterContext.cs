@@ -12,7 +12,7 @@ namespace  AnimalShelter.Models
 
       protected override void OnModelCreating(ModelBuilder builder)
       {
-        builder.Entity<Model>()
+        builder.Entity<Animal>()
         .HasData(
           new Animal { AnimalId = 1, Name = "Fido", Description = "Loves ketchup and playing fetch"},
         );

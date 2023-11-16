@@ -1,7 +1,7 @@
-using ApiTemp.Contracts;
-using ApiTemp.Models;
+using AnimalShelter.Contracts;
+using AnimalShelter.Models;
 
-namespace ApiTemp.Repository
+namespace AnimalShelter.Repository
 {
     public class ModelRepository : RepositoryBase<Model>, IModelRepository
     {

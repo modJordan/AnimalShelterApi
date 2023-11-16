@@ -1,27 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ApiTemp.Models;
+using AnimalShelter.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-namespace ApiTemp.Controllers
+namespace AnimalShelter.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class ModelsController : ControllerBase
+  public class AnimalsController : ControllerBase
   {
-    private readonly ApiTempContext _db;
-    public ModelsController(ApiTempContext db)
+    private readonly AnimalShelterContext _db;
+    public AnimalsController(AnimalShelterContext db)
     {
       _db = db;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Model>>> Get(string name, string description)
+    public async Task<ActionResult<IEnumerable<Animal>>> Get(string name, string description, string species, int age)
     {
-        IQueryable<Model> query = _db.Models.AsQueryable();
+        IQueryable<Animal> query = _db.Animals.AsQueryable();
 
         if (name != null)
         {
@@ -32,41 +32,51 @@ namespace ApiTemp.Controllers
         {
             query = query.Where(entry => entry.Description == description);
         }
+        if (species != null)
+        {
+            query = query.Where(entry => entry.Species == species);
+        }
+        if (age != 0)
+        {
+            query = query.Where(entry => entry.Age == age);
+        }
 
         return await query.ToListAsync();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Model>> GetModel(int id)
+    public async Task<ActionResult<Animal>> GetAnimal(int id)
     {
-        Model model = await _db.Models.FindAsync(id);
+        Animal animal = await _db.Animals.FindAsync(id);
 
-        if (model == null)
+        if (animal == null)
         {
             return NotFound();
         }
 
-        return model;
+        return animal;
     }
 
     [HttpPost]
-    public async Task<ActionResult<Model>> Post(Model model)
+    public async Task<ActionResult<Animal>> Post(Animal animal)
     {
-        _db.Models.Add(model);
+        _db.Animals.Add(animal);
         await _db.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetModel), new{ id = model.ModelId }, model);
+
+        return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
     }
+   
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutModel(int id, Model model)
+    public async Task<IActionResult> PutAnimal(int id, Animal animal)
     {
-        if (id != model.ModelId)
+        if (id != animal.AnimalId)
         {
             return BadRequest();
         }
 
-        _db.Models.Update(model);
+        _db.Animals.Update(animal);
 
         try
         {
@@ -87,25 +97,25 @@ namespace ApiTemp.Controllers
         return NoContent();
     }
 
-    // DELETE: api/Models/5
+    // DELETE: api/Animals/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteModel(int id)
+    public async Task<IActionResult> DeleteAnimal(int id)
     {
-        var model = await _db.Models.FindAsync(id);
-        if (model == null)
+        var animal = await _db.Animals.FindAsync(id);
+        if (animal == null)
         {
             return NotFound();
         }
 
-        _db.Models.Remove(model);
+        _db.Animals.Remove(animal);
         await _db.SaveChangesAsync();
 
         return NoContent();
     }
 
-    private bool ModelExists(int id)
+    private bool AnimalExists(int id)
     {
-        return _db.Models.Any(e => e.ModelId == id);
+        return _db.Animals.Any(e => e.AnimalId == id);
     }
   }
 }

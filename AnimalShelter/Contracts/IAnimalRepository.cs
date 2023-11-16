@@ -1,10 +1,10 @@
-using ApiTemp.Models;
+using AnimalShelter.Models;
 
-namespace ApiTemp.Contracts
+namespace AnimalShelter.Contracts
 {
-    public interface IModelRepository : IRepositoryBase<Model>
+    public interface IANimalRepository : IRepositoryBase<Animal>
     {
-        PagedList<Model> GetModels(PagedParameters modelParameters);
-        Model GetModelById(Guid modelId);
+        PagedList<Animal> GetAnimals(PagedParameters animalParameters);
+        Animal GetAnimalById(Guid animalId);
     }
 }

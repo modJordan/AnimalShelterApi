@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace ApiTemp.Contracts
+namespace AnimalShelter.Contracts
 {
     public interface IRepositoryBase<T>
     {
