@@ -1,12 +1,15 @@
-# API TEMPLATE
+# Animal Shelter API
 
-#### By **[Jordan K]**
+#### By Jordan K
 
-[BRIEF DESCRIPTION]
+## Overview
+
+This project involves creating an API for a local animal shelter. It focuses on listing available cats and dogs, aiding in their adoption process. Built with .NET 5.0 and ASP.NET Core, the API offers full CRUD functionality and includes pagination for efficient data management.
 
 ## Technologies Used
 
-- .NET 5.0
+
+- .NET 6.0
 - ASP.NET Core MVC
 - Entity Framework Core
 - Bootstrap
@@ -16,7 +19,8 @@
 
 ## Description
 
-FULL DESCRIPTION
+The Animal Shelter API serves as a digital platform for the shelter, providing detailed information about the cats and dogs in need of homes. It supports adding new animals, updating their details, retrieving information, and removing listings as animals are adopted.
+
 
 ## Setup/Installation Requirements
 
@@ -47,25 +51,34 @@ FULL DESCRIPTION
 - Run ```dotnet run``` to start the server and application.
 - Visit ```localhost:5000``` in your browser to access Pierre's Sweet and Savory Treats.
 
-## Pagination in API
-The API Template has been enhanced to handle large volumes of records through pagination. This allows for efficient data retrieval and better user experience.
+### CRUD Operations
 
-# Feature Description
+- Add (POST), View (GET), Update (PUT), and Remove (DELETE) pet records.
 
-    - The API supports query parameters for pagination, such as /object?page=2 to access different pages of book records.
-    - This feature ensures performance optimization by loading only a subset of data per request.
+### Pagination
+
+- Optimizes large data handling with page-wise access.
+- Example: `/pets?page=2` retrieves the second page of pet listings.
+
+### Documentation
+
+- Detailed endpoint descriptions with usage examples.
+- Clear guidelines on implementing pagination and other API features.
+
 
 ## User Stories
 
-   - User
-   - Stories 
-   - Here
+- As a user, I want to view all available pets.
+- As a shelter manager, I need to add new pets to the database.
+- As an adopter, I wish to retrieve details about specific pets.
+- As an admin, I need to update or remove pet listings as needed.
 
 ## Objectives
 
-  - CRUD functionality implemented for at least one class.
-  - Create, Update, and Delete functionalities limited to authenticated users.
-  - Secure handling of build files and sensitive information.
+
+- Complete CRUD functionality for pet records.
+- Efficient data retrieval through pagination.
+- Secure handling of sensitive data and configuration files.
 
 ## Known Bugs
 
