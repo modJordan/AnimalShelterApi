@@ -84,7 +84,7 @@ namespace AnimalShelter.Controllers
         }
         catch (DbUpdateConcurrencyException)
         {
-          if (!ModelExists(id))
+          if (!AnimalExists(id))
           {
             return NotFound();
           }
