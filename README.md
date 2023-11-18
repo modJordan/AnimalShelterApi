@@ -35,8 +35,15 @@ The Animal Shelter API serves as a digital platform for the shelter, providing d
 
 ```json
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=treatdb;uid=YOUR_USERNAME;pwd=YOUR_PASSWORD;"
+    "DefaultConnection": "Server=localhost;Port=3306;database=AnimalShelter;uid=UOUR_USERNAME;pwd=YOUR_PASSWORD;"
   }
 }
 
