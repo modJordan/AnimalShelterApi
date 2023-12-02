@@ -4,7 +4,7 @@
 
 ## Overview
 
-This project involves creating an API for a local animal shelter. It focuses on listing available cats and dogs, aiding in their adoption process. Built with .NET 5.0 and ASP.NET Core, the API offers full CRUD functionality and includes pagination for efficient data management.
+This project involves creating an API for a local animal shelter. It focuses on listing available cats and dogs, aiding in their adoption process. Built with .NET 5.0 and ASP.NET Core, the API offers full CRUD functionality and includes pagination for efficient data management.  Pagination has been added to the Swagger page, allowing the viewer to choose how many responses and pages are seen at a time.
 
 ## Technologies Used
 
@@ -15,6 +15,7 @@ This project involves creating an API for a local animal shelter. It focuses on 
 - Bootstrap
 - C#
 - HTML
+- Swashbuckle
 - CSS
 
 ## Description
@@ -24,7 +25,17 @@ The Animal Shelter API serves as a digital platform for the shelter, providing d
 
 ## Setup/Installation Requirements
 
-- Ensure .NET SDK and runtime are installed on your machine.
+If you have not already, install the dotnet-ef tool by running the following command in your terminal:
+
+```dotnet tool install --global dotnet-ef --version 6.0.0```
+
+Also, Install these tools for the implimentation of Pagination:
+
+```dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0.0
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.0```
+
+
+
 - Clone this repository to your local machine.
 - Navigate to the application's directory in your terminal.
 
@@ -33,7 +44,7 @@ The Animal Shelter API serves as a digital platform for the shelter, providing d
 
 1. Create an `appsettings.json` file in the application's root directory with the following content (adjust the connection string as needed based on your SQL setup):
 
-```json
+```appsettings.json
 {
   "Logging": {
     "LogLevel": {
@@ -49,14 +60,28 @@ The Animal Shelter API serves as a digital platform for the shelter, providing d
 
 ```
 
-2. Replace YOUR_USERNAME and YOUR_PASSWORD with your SQL server's username and password.
+2. Create an appsettings.Development.json file and insert the following code:
+```
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Trace",
+      "Microsoft.AspNetCore": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
+```
+
+3. Replace YOUR_USERNAME and YOUR_PASSWORD with your SQL server's username and password.
 </details>
 <br>
 
 - Run the command ```dotnet restore``` to install necessary packages.
 - Run the command ```dotnet build``` to compile the application.
 - Run ```dotnet run``` to start the server and application.
-- Visit ```localhost:5000``` in your browser to access Pierre's Sweet and Savory Treats.
+- Visit ```localhost:5000``` in your browser to access the Animal Shelter API.
 
 ### CRUD Operations
 

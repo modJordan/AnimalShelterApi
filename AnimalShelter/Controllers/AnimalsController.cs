@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Newtonsoft.Json;
+using AnimalShelter.Contracts;
 
 namespace AnimalShelter.Controllers
 {
@@ -13,9 +15,11 @@ namespace AnimalShelter.Controllers
   public class AnimalsController : ControllerBase
   {
     private readonly AnimalShelterContext _db;
-    public AnimalsController(AnimalShelterContext db)
+    private readonly IAnimalRepository _repository;
+    public AnimalsController(AnimalShelterContext db, IAnimalRepository repository)
     {
       _db = db;
+      _repository = repository;
     }
 
     [HttpGet]
@@ -56,6 +60,46 @@ namespace AnimalShelter.Controllers
 
         return animal;
     }
+
+    [HttpGet]
+        [Route("paging-filter")]
+        public IActionResult GetAnimalPagingData([FromQuery] PagedParameters animalParameters)
+        {
+            var animal = _repository.GetAnimals(animalParameters);
+
+            var metadata = new
+            {
+                animal.TotalCount,
+                animal.PageSize,
+                animal.CurrentPage,
+                animal.TotalPages,
+                animal.HasNext,
+                animal.HasPrevious
+            };
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+
+            return Ok(animal);
+        }
+
+    [HttpGet]
+    [Route("getpaging-by-param")]
+        public async Task<ActionResult<IEnumerable<Animal>>> GetparksByFilter(
+            PagedParameters ownerParameters
+        )
+        {
+            if (_db.Animals == null)
+            {
+                return NotFound();
+            }
+            return await _db.Animals
+                .OrderBy(on => on.AnimalId)
+                .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
+                .Take(ownerParameters.PageSize)
+                .ToListAsync();
+        }
+
+
 
     [HttpPost]
     public async Task<ActionResult<Animal>> Post(Animal animal)
